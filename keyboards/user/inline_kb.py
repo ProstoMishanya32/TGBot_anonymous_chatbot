@@ -133,3 +133,77 @@ def error_age(lang):
                 ],
         ])
     return keyboard
+
+
+def privat_video_photo(lang, result):
+    if lang == "ru":
+        if result == 0:
+            button_text = ru_button.settingprivatphoto.off_button
+        else:
+            button_text = ru_button.settingprivatphoto.on_button
+    else:
+        #Переделать под узбек #TODO
+        if result == 0:
+            button_text = ru_button.settingprivatphoto.off_button
+        else:
+            button_text = ru_button.settingprivatphoto.on_button
+    if lang == "ru":
+        keyboard = InlineKeyboardMarkup(
+            inline_keyboard=[
+                [
+                    InlineKeyboardButton(text=button_text, callback_data="change_privat_photo"),
+
+                ],
+                [
+                    InlineKeyboardButton(text=ru_button.common.back, callback_data="settings"),
+                ],
+        ])
+    else:
+        #TODO поменять на узбек.
+        keyboard = InlineKeyboardMarkup(
+            inline_keyboard=[
+                [
+                    InlineKeyboardButton(text=button_text, callback_data="change_privat_photo"),
+                ],
+                [
+                    InlineKeyboardButton(text=ru_button.common.back, callback_data="settings"),
+                ],
+        ])
+    return keyboard
+
+
+def alert_change(lang, result):
+    if lang == "ru":
+        if result == 0:
+            button_text = ru_button.settingsalerts.off_button
+        else:
+            button_text = ru_button.settingsalerts.on_button
+    else:
+        #Переделать под узбек #TODO
+        if result == 0:
+            button_text = ru_button.settingsalerts.off_button
+        else:
+            button_text = ru_button.settingsalerts.on_button
+    if lang == "ru":
+        keyboard = InlineKeyboardMarkup(
+            inline_keyboard=[
+                [
+                    InlineKeyboardButton(text=button_text, callback_data="change_alert"),
+
+                ],
+                [
+                    InlineKeyboardButton(text=ru_button.common.back, callback_data="settings"),
+                ],
+        ])
+    else:
+        #TODO поменять на узбек.
+        keyboard = InlineKeyboardMarkup(
+            inline_keyboard=[
+                [
+                    InlineKeyboardButton(text=button_text, callback_data="change_alert"),
+                ],
+                [
+                    InlineKeyboardButton(text=ru_button.common.back, callback_data="settings"),
+                ],
+        ])
+    return keyboard

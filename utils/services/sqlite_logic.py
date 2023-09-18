@@ -25,6 +25,8 @@ class DataBase:
         in_search INTEGER,
         parther_id INTEGER,
         language TEXT,
+        privat_photo_video INTEGER DEFAULT 0,
+        alert INTEGER DEFAULT 0,
         age INTEGER,
         gender TEXT,
         time_registry DATETIME)""")

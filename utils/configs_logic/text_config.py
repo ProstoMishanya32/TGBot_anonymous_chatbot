@@ -38,3 +38,5 @@ class RuText(CreatingConfig):
             self.finish_age = config.config_field(key = 'finish_age', layer = 'settings', default = '<i>Спасибо, что указали свой возраст</i>')
             self.error_age = config.config_field(key = 'error_age', layer = 'settings', default = 'Вы ввели неправильный возраст\n\nВведите ваш возраст цифрами (от 9 до 99), чтобы мы могли находить вам наиболее подходящих собеседников.\n\nНапример, если вам 21 год, напишите 21:')
             self.age_cancel = config.config_field(key = 'age_cancel', layer = 'settings', default = '<i>Хорошо, спрашивать больше не буду</i>')
+            self.privat_photo_video = config.config_field(key = 'privat_photo_video', layer = 'settings', default = '<i>В режиме скрытия все фотографии, видео, документы и GIF, которые присылает вам собеседник, будут видны только после нажатия вами кнопки "Показать"</i>')
+            self.alerts = config.config_field(key = 'alerts', layer = 'settings', default = '<i>Если вы включите уведомления, то раз в сутки мы будем уведомлять вас о количестве забаненных пользователей по вашим жалобам</i>')

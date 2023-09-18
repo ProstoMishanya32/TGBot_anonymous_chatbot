@@ -51,6 +51,8 @@ async def select_settings(call: CallbackQuery, state: FSMContext):
     data = db.get_user_by_id(call.from_user.id)
     lang = data['language']
     gender = data['gender']
+    privat_photo_video = data['privat_photo_video']
+    alert = data['alert']
 
     if settings == "gender":
         if lang == "ru":
@@ -76,7 +78,16 @@ async def select_settings(call: CallbackQuery, state: FSMContext):
             await call.message.edit_text(ru_text.settings.aged_start, reply_markup=inline_kb.edit_ages(lang))
         else:
             await call.message.edit_text(ru_text.settings.aged_start, reply_markup=inline_kb.edit_ages(lang))
-
+    elif settings == "privat_photo_video":
+        if lang == "ru":
+            await call.message.edit_text(ru_text.settings.privat_photo_video, reply_markup=inline_kb.privat_video_photo(lang, privat_photo_video))
+        else:
+            await call.message.edit_text(ru_text.settings.privat_photo_video, reply_markup=inline_kb.privat_video_photo(lang, privat_photo_video))
+    elif settings == "alerts":
+        if lang == "ru":
+            await call.message.edit_text(ru_text.settings.alerts, reply_markup=inline_kb.alert_change(lang, alert))
+        else:
+            await call.message.edit_text(ru_text.settings.alerts, reply_markup=inline_kb.alert_change(lang, alert))
 
 @router.callback_query(Text(startswith="edit_gender:"))
 async def edit_gender(call: CallbackQuery, state: FSMContext):
@@ -150,3 +161,45 @@ async def age_cancel(call: CallbackQuery, state: FSMContext):
     await state.clear()
 
     await call.message.edit_text(ru_text.settings.age_cancel)
+
+
+@router.callback_query(Text("change_privat_photo"))
+async def change_privat_photo_video(call: CallbackQuery, state: FSMContext):
+    user_id = call.from_user.id
+
+    data = db.get_user_by_id(user_id)
+    privat_photo_video = data['privat_photo_video']
+    lang = data['language']
+
+    if privat_photo_video == 0:
+        result = 1
+    else:
+        result = 0
+
+    db.update_users_column(user_id, "privat_photo_video", result)
+
+    if lang == "ru":
+        await call.message.edit_text(ru_text.settings.privat_photo_video, reply_markup=inline_kb.privat_video_photo(lang, result))
+    else:
+        await call.message.edit_text(ru_text.settings.privat_photo_video, reply_markup=inline_kb.privat_video_photo(lang, result))
+
+
+@router.callback_query(Text("change_alert"))
+async def change_alert(call: CallbackQuery, state: FSMContext):
+    user_id = call.from_user.id
+
+    data = db.get_user_by_id(user_id)
+    alert = data['alert']
+    lang = data['language']
+
+    if alert == 0:
+        result = 1
+    else:
+        result = 0
+
+    db.update_users_column(user_id, "alert", result)
+
+    if lang == "ru":
+        await call.message.edit_text(ru_text.settings.alerts, reply_markup=inline_kb.alert_change(lang, result))
+    else:
+        await call.message.edit_text(ru_text.settings.alerts, reply_markup=inline_kb.alert_change(lang, result))
