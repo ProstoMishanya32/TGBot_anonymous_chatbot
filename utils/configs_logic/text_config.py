@@ -3,25 +3,26 @@ from utils.configs_logic.config_creater import CreatingConfig
 
 class CommonText(CreatingConfig):
     def __init__(self) -> None:
-        super().__init__(path = 'data/text_config.json')
+        super().__init__(path = 'data/text/text_config.json')
         self.welcome = self.Welcome(config = self)
         self.settings = self.Settings(config = self)
 
 
     class Welcome:
         def __init__(self, config : CreatingConfig) -> None:
-            self.first_welcome = config.config_field(key = 'first_welcome', layer = 'welcome', default = 'Привет дорогой <b>{username}</b>.Рады впервые видеть тебя тут.\n\n{select_lang}')
-            self.welcome = config.config_field(key = 'welcome', layer = 'welcome', default = 'Привет дорогой <b>{username}</b>.Мы тебя помним).\nВот тебе главное меню 😁')
+            self.first_welcome = config.config_field(key = 'first_welcome', layer = 'welcome', default = 'Привет дорогой <b>{username}</b> 🖐.\nРады впервые видеть тебя тут.\n\n{select_lang}')
+            self.welcome = config.config_field(key = 'welcome', layer = 'welcome', default = 'Привет дорогой <b>{username}</b>.\nМы тебя помним).\nВот тебе главное меню 😁')
 
     class Settings:
         def __init__(self, config : CreatingConfig) -> None:
-            self.select_lang = config.config_field(key = 'select_lang', layer = 'settings', default = 'Выберите язык 🇷🇺 // Tilni tanlang 🇺🇿')
+            self.select_lang = config.config_field(key = 'select_lang', layer = 'settings', default = 'Выберите язык 🇷🇺 ➖➖ Select a language 🇬🇧')
 
 class RuText(CreatingConfig):
     def __init__(self) -> None:
-        super().__init__(path = 'data/text_config.json')
+        super().__init__(path = 'data/text/ru_text.json')
         self.menu = self.Menu(config = self)
         self.settings = self.Settings(config = self)
+        self.interests = self.Interests(config = self)
 
     class Menu:
         def __init__(self, config : CreatingConfig) -> None:
@@ -40,3 +41,7 @@ class RuText(CreatingConfig):
             self.age_cancel = config.config_field(key = 'age_cancel', layer = 'settings', default = '<i>Хорошо, спрашивать больше не буду</i>')
             self.privat_photo_video = config.config_field(key = 'privat_photo_video', layer = 'settings', default = '<i>В режиме скрытия все фотографии, видео, документы и GIF, которые присылает вам собеседник, будут видны только после нажатия вами кнопки "Показать"</i>')
             self.alerts = config.config_field(key = 'alerts', layer = 'settings', default = '<i>Если вы включите уведомления, то раз в сутки мы будем уведомлять вас о количестве забаненных пользователей по вашим жалобам</i>')
+
+    class Interests:
+        def __init__(self, config : CreatingConfig) -> None:
+            self.menu = config.config_field(key = 'menu', layer = 'interests', default = '<i>Мы попытаемся соединить вас с собеседниками, которые выбрали похожие интересы.\n\nВыберите ваши интересы:</i>')

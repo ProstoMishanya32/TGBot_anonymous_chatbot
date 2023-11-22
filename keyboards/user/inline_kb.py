@@ -8,7 +8,7 @@ def select_lang():
         inline_keyboard=[
             [
                 InlineKeyboardButton(text="Русский 🇷🇺", callback_data="selectlang:ru"),
-                InlineKeyboardButton(text="o'zbek tili 🇺🇿", callback_data="selectlang:uz"),
+                InlineKeyboardButton(text="English 🇬🇧", callback_data="selectlang:gb"),
             ]
     ])
     return keyboard
@@ -204,6 +204,116 @@ def alert_change(lang, result):
                 ],
                 [
                     InlineKeyboardButton(text=ru_button.common.back, callback_data="settings"),
+                ],
+        ])
+    return keyboard
+
+
+def interests_menu(lang, interests):
+    if lang == "ru":
+        keyboard = InlineKeyboardMarkup(
+            inline_keyboard=[
+                [
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['role_game'] == 1 else ''}{ru_button.interests.role_game}", callback_data="change_interests:role_game"),
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['mems'] == 1 else ''}{ru_button.interests.mems}", callback_data="change_interests:mems"),
+                ],
+                [
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['loneliness'] == 1 else ''}{ru_button.interests.loneliness}", callback_data="change_interests:loneliness"),
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['flirting'] == 1 else ''}{ru_button.interests.flirting}", callback_data="change_interests:flirting"),
+                ],
+                [
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['games'] == 1 else ''}{ru_button.interests.games}", callback_data="change_interests:games"),
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['music'] == 1 else ''}{ru_button.interests.music}", callback_data="change_interests:music"),
+                ],
+                [
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['travels'] == 1 else ''}{ru_button.interests.travels}", callback_data="change_interests:travels"),
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['anime'] == 1 else ''}{ru_button.interests.anime}", callback_data="change_interests:anime"),
+                ],
+                [
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['movies'] == 1 else ''}{ru_button.interests.movies}", callback_data="change_interests:movies"),
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['pets'] == 1 else ''}{ru_button.interests.pets}", callback_data="change_interests:pets"),
+                ],
+                [
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['books'] == 1 else ''}{ru_button.interests.books}", callback_data="change_interests:books"),
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['sport'] == 1 else ''}{ru_button.interests.sport}", callback_data="change_interests:sport"),
+                ],
+                [
+                    InlineKeyboardButton(text=ru_button.interests.reset_interests, callback_data="change_interests:reset_interests"),
+                ]
+        ])
+    else:
+        #TODO поменять на узбек.
+        keyboard = InlineKeyboardMarkup(
+            inline_keyboard=[
+                [
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['role_game'] == 1 else ''}{ru_button.interests.role_game}", callback_data="change_interests:role_game"),
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['mems'] == 1 else ''}{ru_button.interests.mems}", callback_data="change_interests:mems"),
+                ],
+                [
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['loneliness'] == 1 else ''}{ru_button.interests.loneliness}", callback_data="change_interests:loneliness"),
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['flirting'] == 1 else ''}{ru_button.interests.flirting}", callback_data="change_interests:flirting"),
+                ],
+                [
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['games'] == 1 else ''}{ru_button.interests.games}", callback_data="change_interests:games"),
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['music'] == 1 else ''}{ru_button.interests.music}", callback_data="change_interests:music"),
+                ],
+                [
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['travels'] == 1 else ''}{ru_button.interests.travels}", callback_data="change_interests:travels"),
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['anime'] == 1 else ''}{ru_button.interests.anime}", callback_data="change_interests:anime"),
+                ],
+                [
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['movies'] == 1 else ''}{ru_button.interests.movies}", callback_data="change_interests:movies"),
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['pets'] == 1 else ''}{ru_button.interests.pets}", callback_data="change_interests:pets"),
+                ],
+                [
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['books'] == 1 else ''}{ru_button.interests.books}", callback_data="change_interests:books"),
+                    InlineKeyboardButton(text=f"{'✅ ' if interests['sport'] == 1 else ''}{ru_button.interests.sport}", callback_data="change_interests:sport"),
+                ],
+                [
+                    InlineKeyboardButton(text=ru_button.interests.reset_interests, callback_data="change_interests:reset_interests"),
+                ]
+        ])
+    return keyboard
+
+
+
+def stop_searching(lang):
+    if lang == "ru":
+        keyboard = InlineKeyboardMarkup(
+            inline_keyboard=[
+                [
+                    InlineKeyboardButton(text=ru_button.searchingparther.stop, callback_data="stop_searching"),
+
+                ],
+        ])
+    else:
+        #TODO поменять на англ..
+        keyboard = InlineKeyboardMarkup(
+            inline_keyboard=[
+                [
+                    InlineKeyboardButton(text=ru_button.searchingparther.stop, callback_data="stop_searching"),
+
+                ],
+        ])
+    return keyboard
+
+
+def stop_message(lang):
+    if lang == "ru":
+        keyboard = InlineKeyboardMarkup(
+            inline_keyboard=[
+                [
+                    InlineKeyboardButton(text=ru_button.searchingparther.stop_message, callback_data="stop_message"),
+
+                ],
+        ])
+    else:
+        #TODO поменять на англ..
+        keyboard = InlineKeyboardMarkup(
+            inline_keyboard=[
+                [
+                    InlineKeyboardButton(text=ru_button.searchingparther.stop_message, callback_data="stop_message"),
+
                 ],
         ])
     return keyboard
