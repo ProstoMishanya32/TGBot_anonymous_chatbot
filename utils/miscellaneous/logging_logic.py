@@ -1,42 +1,19 @@
-import logging as bot_logger
+import logging
 
-import colorlog
-import os
+logger = logging.getLogger(__name__) #Создание объекта логгера
+logger.setLevel(logging.DEBUG)
 
-from utils.miscellaneous.get_info import generate_log_filename
 
-log_folder = "./data/logs"
-if not os.path.exists(log_folder):
-    os.makedirs(log_folder)
+# Создаем файл логов
+handler = logging.FileHandler("./data/logs/logs.log", encoding="utf-8")
+handler.setLevel(logging.DEBUG)
 
-# Формат логгирования для файла
-log_formatter_file = bot_logger.Formatter("%(levelname)s | %(asctime)s | %(filename)s:%(lineno)d | %(message)s")
+#Формат для записи логов
 
-# Формат логгирования для консоли с цветами
-log_formatter_console = colorlog.ColoredFormatter(
-    "%(purple)s%(levelname)s %(blue)s|%(purple)s %(asctime)s %(blue)s|%(purple)s %(filename)s:%(lineno)d %(blue)s|%(purple)s %(message)s%(red)s",
-    datefmt="%d-%m-%Y %H:%M:%S",
-)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
 
-# Логгирование в файл в отдельной папке для каждой сессии
-log_filename = os.path.join(log_folder, generate_log_filename())
-file_handler = bot_logger.FileHandler(log_filename, "w", "utf-8")
-file_handler.setFormatter(log_formatter_file)
-file_handler.setLevel(bot_logger.DEBUG)  # Установите нужный уровень логгирования
+#Добавление файл логов в логгер
+logger.addHandler(handler)
 
-# Логгирование в консоль
-console_handler = bot_logger.StreamHandler()
-console_handler.setFormatter(log_formatter_console)
-console_handler.setLevel(bot_logger.DEBUG)  # Установите нужный уровень логгирования
 
-# Создание логгера и установка уровня логгирования
-logger = bot_logger.getLogger("skeynews")
-logger.setLevel(bot_logger.DEBUG)  # Установите нужный уровень логгирования
-
-# Добавление обработчиков (handlers) к логгеру
-logger.addHandler(file_handler)
-logger.addHandler(console_handler)
-
-# Функция для логгирования ошибок с информацией о типе и описании
-def log_error_with_info(message, error_type, error_description):
-    logger.error(f"{message} | Тип ошибки: {error_type} | Описание: {error_description}")
